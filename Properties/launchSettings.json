@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "Proyecto_Tareas": {
+      "commandName": "Project"
+    },
+    "Perfil 1": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\Oceano\\Desktop\\Pruebas\\Deserializar.cs"
+    },
+    "Perfil 2": {
+      "commandName": "Project"
+    }
+  }
+}
