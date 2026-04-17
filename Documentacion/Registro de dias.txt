@@ -1,0 +1,26 @@
+
+27/03/2026 Creacion de Proyecto Tareas en Git.
+
+30/03/2026 Creacion de Tareas.cs.
+
+31/04/2026 Arreglos de Git.
+
+2/04/2026 Definicion y creacion de Clase Tarea.cs y SubTareas: TareaSimple.cs, TareaUrgente.cs, TareaRecurente.cs y TareaConSubtareas.cs.
+
+4/04/2026 Creacion de clase GestorTareas.cs y Enums: EstadoTareas.cs y Tareas.cs.
+
+6/04/2026 Arreglo Clase Tarea.cs y cambio de version de .NET6.0 a .NET8.0.
+
+7/04/2026 Restructuracion de Proyecto Tareas: Destrucion de clases hijo, modificacion Tarea.cs y GestorTareas.cs, añadido EstadoTareas PrioridadMaxima y creacion Programa.cs.
+
+8/04/2026 Creacion diagrama de clases y modificacion Programa.cs.
+
+10/04/2026 Pruebas JSON en Programas.cs.
+
+13/04/2026 Creacion de TareaDto.cs y pruebas JSON.
+
+14/04/2026 Arreglo de errores vinculacion de el Proyecto con Visual Studio.
+
+15/04/2026 Creacion de Pruebas_Unitarias.cs.
+
+17/04/2026 Arreglos y organizacion de el proyecto.

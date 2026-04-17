@@ -20,23 +20,25 @@ namespace Proyecto_Tareas.Dominio.Clases
 
         public IReadOnlyCollection<Tarea> Subtareas => _subtareas.AsReadOnly();
 
-        public Tarea(int id, string titulo, string descripcion, DateTime fechaLimite, PrioridadTarea prioridad)
+        public Tarea(int id, string titulo, string? descripcion, DateTime fechaLimite, PrioridadTarea prioridad)
         {
             if (id <= 0)
-                throw new ArgumentException("El ide debe ser mayor que 0");
+                throw new ArgumentException("El id debe ser mayor que 0");
 
             if (string.IsNullOrWhiteSpace(titulo))
                 throw new ArgumentException("El titulo no puede estar vacio");
 
-            if (string.IsNullOrWhiteSpace(descripcion))
-                throw new ArgumentException("La descripcion no puede estar vacia");
-
             if (fechaLimite <= DateTime.Now)
-                throw new ArgumentException("La fecha limite debe ser posterior al momento actual");
+                throw new ArgumentException("La fecha limite tiene que ser posterior al momento actual");
 
             Id = id;
             Titulo = titulo;
-            Descripcion = descripcion;
+
+            if (descripcion == null)
+                Descripcion = "";
+            else
+                Descripcion = descripcion;
+
             FechaCreacion = DateTime.Now;
             FechaFinalizacion = null;
             FechaLimite = fechaLimite;
