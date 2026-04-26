@@ -9,14 +9,14 @@ namespace Proyecto_Tareas.Dominio.Clases
     {
         private readonly List<Tarea> _subtareas = new();
 
-        public int Id { get; private set; }
-        public string Titulo { get; private set; }
-        public string Descripcion { get; private set; }
-        public DateTime FechaCreacion { get; private set; }
-        public DateTime? FechaFinalizacion { get; private set; }
-        public DateTime FechaLimite { get; private set; }
-        public EstadoTarea Estado { get; private set; }
-        public PrioridadTarea Prioridad { get; private set; }
+        public int Id { get; protected set; }
+        public string Titulo { get; protected set; }
+        public string Descripcion { get; protected set; }
+        public DateTime FechaCreacion { get; protected set; }
+        public DateTime? FechaFinalizacion { get; protected set; }
+        public DateTime FechaLimite { get; protected set; }
+        public EstadoTarea Estado { get; protected set; }
+        public PrioridadTarea Prioridad { get; protected set; }
 
         public IReadOnlyCollection<Tarea> Subtareas => _subtareas.AsReadOnly();
 
@@ -83,7 +83,7 @@ namespace Proyecto_Tareas.Dominio.Clases
             );
         }
 
-        public void Iniciar()
+        public virtual void Iniciar()
         {
             if (Estado != EstadoTarea.Pendiente)
                 throw new InvalidOperationException("Solo se puede iniciar una tarea pendiente");
@@ -91,7 +91,7 @@ namespace Proyecto_Tareas.Dominio.Clases
             Estado = EstadoTarea.EnProgreso;
         }
 
-        public void Finalizar()
+        public virtual void Finalizar()
         {
             if (Estado == EstadoTarea.Cancelado)
                 throw new InvalidOperationException("No se puede finalizar una tarea cancelada");
@@ -103,7 +103,7 @@ namespace Proyecto_Tareas.Dominio.Clases
             FechaFinalizacion = DateTime.Now;
         }
 
-        public void Cancelar()
+        public virtual void Cancelar()
         {
             if (Estado == EstadoTarea.Completado)
                 throw new InvalidOperationException("No se puede cancelar una tarea completada");
@@ -137,19 +137,22 @@ namespace Proyecto_Tareas.Dominio.Clases
             _subtareas.Remove(subtarea);
         }
 
-        public string ObtenerResumen()
+        public virtual string ObtenerResumen()
         {
             return $"[{Id}] {Titulo} | Estado: {Estado} | Prioridad: {Prioridad} | Fecha limite: {FechaLimite:g}";
         }
 
-        public string ObtenerDetalle()
+        public virtual string ObtenerDetalle()
         {
-            string fechaFinalizacionTexto = FechaFinalizacion.HasValue
-                ? FechaFinalizacion.Value.ToString("g")
-                : "Sin finalizar";
+            string fechaTexto;
+
+            if (FechaFinalizacion.HasValue)
+                fechaTexto = FechaFinalizacion.Value.ToString("g");
+            else
+                fechaTexto = "Sin finalizar";
 
             return $"Id: {Id} | Titulo: {Titulo} | Descripcion: {Descripcion} | " +
-                   $"Fecha creacion: {FechaCreacion:g} | Fecha finalizacion: {fechaFinalizacionTexto} | " +
+                   $"Fecha creacion: {FechaCreacion:g} | Fecha finalizacion: {fechaTexto} | " +
                    $"Fecha limite: {FechaLimite:g} | Estado: {Estado} | Prioridad: {Prioridad} | " +
                    $"Numero de subtareas: {_subtareas.Count}";
         }

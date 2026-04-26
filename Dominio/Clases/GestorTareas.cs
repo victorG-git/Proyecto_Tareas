@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Proyecto_Tareas.Aplicacion.DTOs;
 using Proyecto_Tareas.Infraestructura.Repositorios;
 
@@ -10,15 +11,24 @@ namespace Proyecto_Tareas.Dominio.Clases
     {
         private readonly List<Tarea> tareas;
         private readonly Dictionary<int, Tarea> identificador;
-        private readonly TareaRepositorio repositorio;
-        private readonly string rutaArchivo;
+
+        // Repositorio JSON antiguo
+        // private readonly TareaRepositorio repositorio;
+        // private readonly string rutaArchivo;
+
+        // Repositorio SQL nuevo
+        private readonly RepositorioTareasSql repositorioSQL;
+
 
         public GestorTareas()
         {
             tareas = new List<Tarea>();
             identificador = new Dictionary<int, Tarea>();
-            repositorio = new TareaRepositorio();
-            rutaArchivo = "tareas.json";
+            
+            //repositorio = new TareaRepositorio();
+            //rutaArchivo = "tareas.json";
+
+            repositorioSQL = new RepositorioTareasSql();
         }
 
         public void AgregarTarea(Tarea tarea)
@@ -29,6 +39,9 @@ namespace Proyecto_Tareas.Dominio.Clases
                 throw new ArgumentException($"Ya existe una tarea con id {tarea.Id}.");
 
             tareas.Add(tarea);
+
+            // repositorio.Agregar(tarea);
+            // repositorio.GuardarCambios();
         }
 
         public List<Tarea> ObtenerTareas()
@@ -39,6 +52,8 @@ namespace Proyecto_Tareas.Dominio.Clases
         public Tarea? BuscarPorId(int id)
         {
             return identificador.TryGetValue(id, out Tarea? tarea) ? tarea : null;
+
+            // return repositorio.BuscarPorId(id);
         }
 
         public bool EliminarTarea(int id)
@@ -56,20 +71,28 @@ namespace Proyecto_Tareas.Dominio.Clases
                 }
             }
 
+            // repositorio.Eliminar(id);
+            // repositorio.GuardarCambios();
+
             return true;
         }
 
         public void GuardarDatos()
         {
+            /*
             List<TareaDto> tareasDto = tareas
                 .Select(t => t.ToDto())
                 .ToList();
 
             repositorio.Guardar(rutaArchivo, tareasDto);
+            */
+
+            // repositorioSQL.GuardarCambios();
         }
 
         public void CargarDatos()
         {
+            /*
             List<TareaDto> tareasDto = repositorio.Cargar(rutaArchivo);
 
             tareas.Clear();
@@ -98,6 +121,21 @@ namespace Proyecto_Tareas.Dominio.Clases
                     }
                 }
             }
+            */
+
+            // SQL nuevo
+            /*
+            List<Tarea> tareasBaseDatos = repositorioSQL.ObtenerTodas();
+
+            tareas.Clear();
+            identificador.Clear();
+
+            foreach (Tarea tarea in tareasBaseDatos)
+            {
+                tareas.Add(tarea);
+                identificador.Add(tarea.Id, tarea);
+            }
+            */
         }
     }
 }
