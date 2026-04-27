@@ -24,3 +24,5 @@
 15/04/2026 Creacion de Pruebas_Unitarias.cs.
 
 17/04/2026 Arreglos y organizacion de el proyecto.
+
+21/04/2026 Correcion final de el diagrama y estructuracion JSON.

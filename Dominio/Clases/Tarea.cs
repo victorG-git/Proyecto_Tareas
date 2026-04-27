@@ -20,7 +20,7 @@ namespace Proyecto_Tareas.Dominio.Clases
 
         public IReadOnlyCollection<Tarea> Subtareas => _subtareas.AsReadOnly();
 
-        public Tarea(int id, string titulo, string? descripcion, DateTime fechaLimite, PrioridadTarea prioridad)
+        public Tarea(int id, string titulo, string descripcion, DateTime fechaLimite, PrioridadTarea prioridad)
         {
             if (id <= 0)
                 throw new ArgumentException("El id debe ser mayor que 0");

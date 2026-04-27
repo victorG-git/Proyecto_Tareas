@@ -6,7 +6,7 @@ namespace Proyecto_Tareas
 {
     internal class Program
     {
-        static void Main(string[] args)
+      /*  static void Main(string[] args)
         {
             GestorTareas gestor = new GestorTareas();
 
@@ -74,6 +74,6 @@ namespace Proyecto_Tareas
             Console.WriteLine();
             Console.WriteLine("Pulsa una tecla para cerrar.");
             Console.ReadKey();
-        }
+        }*/
     }
 }

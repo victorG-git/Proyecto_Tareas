@@ -6,15 +6,11 @@ namespace Proyecto_Tareas.Aplicacion.DTOs
     public class TareaDto
     {
         public int Id { get; set; }
-        public string Titulo { get; set; } = string.Empty;
+        public string Titulo { get; set; }
         public DateTime FechaLimite { get; set; }
         public EstadoTarea Estado { get; set; }
         public PrioridadTarea Prioridad { get; set; }
         public List<int> IdsSubtareas { get; set; } = new List<int>();
-
-        public TareaDto()
-        {
-        }
 
         public TareaDto(
             int id,
