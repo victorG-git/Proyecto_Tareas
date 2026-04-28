@@ -9,15 +9,27 @@ namespace Proyecto_Tareas.Dominio.Clases
 {
     internal class Usuario
     { 
-        private int Id { get; set; }
-        private string Nombre { get; set; }
-        private string Email { get; set; }
-        private string Pasword { get; set; }
-        private bool EsAdmin { get; set; }
-        private DateTime FechaCreacion { get; set; }
+        public int Id { get; protected set; }
+        public string Nombre { get; protected set; }
+        public string Email { get; protected set; }
+        public string Contrasenia { get; protected set; }
+        public bool EsAdmin { get; protected set; }
+        public DateTime FechaCreacion { get; protected set; }
 
 
+        public Usuario (int id, string nombre, string email, string contrasenia, bool esAdmin, DateTime fechaCreacion)
+        {
+            Id = id;
+            Nombre = nombre;
+            Email = email;
+            Contrasenia = contrasenia;
+            EsAdmin = esAdmin;
+            FechaCreacion = fechaCreacion;
+        }
 
-
+        public string ObtenerUsuario()
+        {
+            return $"[{Id}] {Nombre} | Email: {Email} | Permisos: {EsAdmin} | Fecha de creacion: {FechaCreacion:g}";
+        }
     }
 }

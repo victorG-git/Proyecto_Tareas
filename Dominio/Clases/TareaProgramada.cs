@@ -25,8 +25,38 @@ namespace Proyecto_Tareas.Dominio.Clases
 
         public void FinalziarTarea()
         {
+            if (Estado == EstadoTarea.Cancelado)
+                throw new InvalidOperationException("No se puede finalizar una tarea cancelada");
+
+            if (Estado == EstadoTarea.Completado)
+                throw new InvalidOperationException("La tarea ya esta completada");
+
+            Estado = EstadoTarea.Completado;
+            fechaFinalizacion = DateTime.Now;
+        }
+
+        public void GenerarSiguienteFecha()
+        {
 
         }
 
+        public override string ObtenerResumen()
+        {
+            return $"[{Id}] {Titulo} | Estado: {Estado} | Prioridad: {Prioridad} | Fecha limite: {fechaLimite:g}";
+        }
+
+        public string ObtenerDetalles()
+        {
+            string fechaTexto;
+
+            if (fechaFinalizacion.HasValue)
+                fechaTexto = fechaFinalizacion.Value.ToString("g");
+            else
+                fechaTexto = "Sin finalizar";
+
+            return $"Id: {Id} | Titulo: {Titulo} | Descripcion: {Descripcion} | " +
+                   $"Fecha creacion: {fechaCreacion:g} | Fecha finalizacion: {fechaTexto} | " +
+                   $"Fecha limite: {fechaLimite:g} | Estado: {Estado} | Prioridad: {Prioridad} | ";
+        }
     }
 }
