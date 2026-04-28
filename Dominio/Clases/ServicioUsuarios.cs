@@ -30,7 +30,7 @@ namespace Proyecto_Tareas.Dominio.Clases
             if (usuario == null)
                 return null;
 
-            if (usuario.contrasenia != contrasenia)
+            if (!usuario.ValidarContrasenia(contrasenia))
                 return null;
 
             if (!usuario.Activo)
@@ -41,10 +41,7 @@ namespace Proyecto_Tareas.Dominio.Clases
 
         public Usuario? ObtenerPorId(int id)
         {
-            if (identificadorUsuario.TryGetValue(id, out var usuario))
-                return usuario;
-
-            return null;
+            return identificadorUsuario.TryGetValue(id, out var usuario) ? usuario : null;
         }
 
         public void DesactivarUsuario(int id)
@@ -54,8 +51,17 @@ namespace Proyecto_Tareas.Dominio.Clases
             if (usuario == null)
                 throw new KeyNotFoundException($"No existe un usuario con id {id}.");
 
-            usuario.Activo = false;
+            usuario.Desactivar();
         }
 
+        public void ActivarUsuario(int id)
+        {
+            var usuario = ObtenerPorId(id);
+
+            if (usuario == null)
+                throw new KeyNotFoundException($"No existe un usuario con id {id}.");
+
+            usuario.Activar();
+        }
     }
 }
