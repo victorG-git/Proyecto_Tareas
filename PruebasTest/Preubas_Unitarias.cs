@@ -41,7 +41,7 @@ namespace Proyecto_Tareas.PruebasTest
             tarea.Finalizar();
 
             Assert.That(tarea.Estado, Is.EqualTo(EstadoTarea.Completado));
-            Assert.That(tarea.FechaFinalizacion, Is.Not.Null);
+            Assert.That(tarea.fechaFinalizacion, Is.Not.Null);
         }
 
         [Test]
@@ -71,5 +71,14 @@ namespace Proyecto_Tareas.PruebasTest
             Assert.That(resultado, Is.Not.Null);
             Assert.That(resultado.Id, Is.EqualTo(1));
         }
+            /*
+        [Test]
+        public void PareaProgramada() 
+        {
+            TareaProgramada programar = new TareaProgramada();
+            programar.AgregarSubtarea();
+
+        
+        }*/
     }
 }

@@ -9,14 +9,14 @@ namespace Proyecto_Tareas.Dominio.Clases
     {
         private readonly List<Tarea> _subtareas = new();
 
-        public int Id { get; private set; }
-        public string Titulo { get; private set; }
-        public string Descripcion { get; private set; }
-        public DateTime FechaCreacion { get; private set; }
-        public DateTime? FechaFinalizacion { get; private set; }
-        public DateTime FechaLimite { get; private set; }
-        public EstadoTarea Estado { get; private set; }
-        public PrioridadTarea Prioridad { get; private set; }
+        public int Id { get; protected set; }
+        public string Titulo { get; protected set; }
+        public string Descripcion { get; protected set; }
+        public DateTime fechaCreacion { get; protected set; }
+        public DateTime? fechaFinalizacion { get; protected set; }
+        public DateTime fechaLimite { get; protected set; }
+        public EstadoTarea Estado { get; protected set; }
+        public PrioridadTarea Prioridad { get; protected set; }
 
         public IReadOnlyCollection<Tarea> Subtareas => _subtareas.AsReadOnly();
 
@@ -39,9 +39,9 @@ namespace Proyecto_Tareas.Dominio.Clases
             else
                 Descripcion = descripcion;
 
-            FechaCreacion = DateTime.Now;
-            FechaFinalizacion = null;
-            FechaLimite = fechaLimite;
+            fechaCreacion = DateTime.Now;
+            fechaFinalizacion = null;
+            fechaLimite = fechaLimite;
             Estado = EstadoTarea.Pendiente;
             Prioridad = prioridad;
         }
@@ -51,21 +51,25 @@ namespace Proyecto_Tareas.Dominio.Clases
             Id = id;
             Titulo = titulo;
             Descripcion = "Descripcion no recuperada desde JSON";
-            FechaCreacion = DateTime.Now;
-            FechaFinalizacion = estado == EstadoTarea.Completado ? DateTime.Now : null;
-            FechaLimite = fechaLimite;
+            fechaCreacion = DateTime.Now;
+            fechaFinalizacion = estado == EstadoTarea.Completado ? DateTime.Now : null;
+            fechaLimite = fechaLimite;
             Estado = estado;
             Prioridad = prioridad;
         }
 
+        //Arreglos DTO
+
+        /*
         public static Tarea FromDto(TareaDto dto)
         {
+
             ArgumentNullException.ThrowIfNull(dto);
 
             return new Tarea(
                 dto.Id,
                 dto.Titulo,
-                dto.FechaLimite,
+                dto.fechaLimite,
                 dto.Estado,
                 dto.Prioridad
             );
@@ -76,14 +80,15 @@ namespace Proyecto_Tareas.Dominio.Clases
             return new TareaDto(
                 Id,
                 Titulo,
-                FechaLimite,
+                fechaLimite,
                 Estado,
                 Prioridad,
                 _subtareas.Select(s => s.Id).ToList()
             );
         }
+        */
 
-        public void Iniciar()
+        public virtual void Iniciar()
         {
             if (Estado != EstadoTarea.Pendiente)
                 throw new InvalidOperationException("Solo se puede iniciar una tarea pendiente");
@@ -91,7 +96,7 @@ namespace Proyecto_Tareas.Dominio.Clases
             Estado = EstadoTarea.EnProgreso;
         }
 
-        public void Finalizar()
+        public virtual void Finalizar()
         {
             if (Estado == EstadoTarea.Cancelado)
                 throw new InvalidOperationException("No se puede finalizar una tarea cancelada");
@@ -100,10 +105,10 @@ namespace Proyecto_Tareas.Dominio.Clases
                 throw new InvalidOperationException("La tarea ya esta completada");
 
             Estado = EstadoTarea.Completado;
-            FechaFinalizacion = DateTime.Now;
+            fechaFinalizacion = DateTime.Now;
         }
 
-        public void Cancelar()
+        public virtual void Cancelar()
         {
             if (Estado == EstadoTarea.Completado)
                 throw new InvalidOperationException("No se puede cancelar una tarea completada");
@@ -137,20 +142,23 @@ namespace Proyecto_Tareas.Dominio.Clases
             _subtareas.Remove(subtarea);
         }
 
-        public string ObtenerResumen()
+        public virtual string ObtenerResumen()
         {
-            return $"[{Id}] {Titulo} | Estado: {Estado} | Prioridad: {Prioridad} | Fecha limite: {FechaLimite:g}";
+            return $"[{Id}] {Titulo} | Estado: {Estado} | Prioridad: {Prioridad} | Fecha limite: {fechaLimite:g}";
         }
 
-        public string ObtenerDetalle()
+        public virtual string ObtenerDetalle()
         {
-            string fechaFinalizacionTexto = FechaFinalizacion.HasValue
-                ? FechaFinalizacion.Value.ToString("g")
-                : "Sin finalizar";
+            string fechaTexto;
+
+            if (fechaFinalizacion.HasValue)
+                fechaTexto = fechaFinalizacion.Value.ToString("g");
+            else
+                fechaTexto = "Sin finalizar";
 
             return $"Id: {Id} | Titulo: {Titulo} | Descripcion: {Descripcion} | " +
-                   $"Fecha creacion: {FechaCreacion:g} | Fecha finalizacion: {fechaFinalizacionTexto} | " +
-                   $"Fecha limite: {FechaLimite:g} | Estado: {Estado} | Prioridad: {Prioridad} | " +
+                   $"Fecha creacion: {fechaCreacion:g} | Fecha finalizacion: {fechaTexto} | " +
+                   $"Fecha limite: {fechaLimite:g} | Estado: {Estado} | Prioridad: {Prioridad} | " +
                    $"Numero de subtareas: {_subtareas.Count}";
         }
     }

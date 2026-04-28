@@ -5,6 +5,7 @@ namespace Proyecto_Tareas.Aplicacion.DTOs
 {
     public class TareaDto
     {
+        /*
         public int Id { get; set; }
         public string Titulo { get; set; }
         public DateTime FechaLimite { get; set; }
@@ -26,6 +27,6 @@ namespace Proyecto_Tareas.Aplicacion.DTOs
             Estado = estado;
             Prioridad = prioridad;
             IdsSubtareas = idsSubtareas;
-        }
+        }*/
     }
 }
