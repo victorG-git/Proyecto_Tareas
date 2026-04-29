@@ -7,6 +7,7 @@ namespace Proyecto_Tareas.PruebasTest
     public class Pruebas_Unitarias
     {
         private Tarea tarea;
+        private Usuario usuario;
 
         [SetUp]
         public void Setup()
@@ -17,6 +18,17 @@ namespace Proyecto_Tareas.PruebasTest
                 "Descripcion de prueba",
                 DateTime.Now.AddDays(2),
                 PrioridadTarea.Media
+            );
+        }
+
+        public void UsuarioTest()
+        {
+            usuario = new Usuario(
+                3,
+                "Mauricio",
+                "mauriciocolmenero@gmail.com",
+                "tiri.tiri.tiri",
+                esAdmin:true
             );
         }
 
@@ -71,9 +83,16 @@ namespace Proyecto_Tareas.PruebasTest
             Assert.That(resultado, Is.Not.Null);
             Assert.That(resultado.Id, Is.EqualTo(1));
         }
+
+        [Test]
+        public void TesteoUsuario()
+        {
+            usuario.CambiarEmail("mauricio28@gmail.com");
+            usuario.CambiarContrasenia("pureba28");
+        }
             /*
         [Test]
-        public void PareaProgramada() 
+        public void TareaProgramada() 
         {
             TareaProgramada programar = new TareaProgramada();
             programar.AgregarSubtarea();
