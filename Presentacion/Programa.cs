@@ -1,11 +1,11 @@
-using Proyecto_Tareas.Aplicacion.Servicio.Proyecto_Tareas.Aplicacion.Servicio;
+using Proyecto_Tareas.Dominio.Clases;
 
 namespace Proyecto_Tareas
 {
     public class Program
     {
-        public static void Main(string[] args)
-        {
+        /*
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Registrar servicios
@@ -30,6 +30,6 @@ namespace Proyecto_Tareas
             app.MapControllers();
 
             app.Run();
-        }
+        }*/
     }
 }

@@ -9,8 +9,8 @@ namespace Proyecto_Tareas.Dominio.Clases
     internal class TareaProgramada : Tarea
     {
         public int FrecuenciaDias { get; private set; }
-        public DateTime ProximaFecha { get; private set; }
-
+        public DateTime ProximaFecha { get; private set; } = DateTime.Now;
+        
 
         public TareaProgramada(int id, string titulo, string descripcion, DateTime fechaLimite,
                                   PrioridadTarea prioridad, int frecuenciaDias)

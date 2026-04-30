@@ -1,9 +1,7 @@
-﻿namespace Proyecto_Tareas.Aplicacion.Servicio
-using global::Proyecto_Tareas.Dominio.Clases;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 
-namespace Proyecto_Tareas.Aplicacion.Servicio
+namespace Proyecto_Tareas.Dominio.Clases
 {
     public class GestorTareasContext : DbContext
     {
@@ -27,5 +25,4 @@ namespace Proyecto_Tareas.Aplicacion.Servicio
             }
         }
     }
-}
 }

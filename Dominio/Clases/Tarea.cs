@@ -10,13 +10,17 @@ namespace Proyecto_Tareas.Dominio.Clases
         private readonly List<Tarea> _subtareas = new();
 
         public int Id { get; protected set; }
-        public string Titulo { get; protected set; }
+        public string Titulo { get; protected set; } = string.Empty;
         public string Descripcion { get; protected set; }
-        public DateTime fechaCreacion { get; protected set; }
+        public DateTime fechaCreacion { get; protected set; } = DateTime.Now;
         public DateTime? fechaFinalizacion { get; protected set; }
         public DateTime fechaLimite { get; protected set; }
         public EstadoTarea Estado { get; protected set; }
         public PrioridadTarea Prioridad { get; protected set; }
+
+        public int UsuarioId { get; set; } //FK hacia Usuarios
+
+        public Usuario Usuario { get; set; } = null;
 
         public IReadOnlyCollection<Tarea> Subtareas => _subtareas.AsReadOnly();
 

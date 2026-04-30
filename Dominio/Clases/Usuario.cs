@@ -10,11 +10,11 @@ using System.Threading.Tasks;
         public class Usuario
         {
             public int Id { get; set; }
-            public string Nombre { get; protected set; }
-            public string Email { get; protected set; }
-            public string Contrasenia { get; private set; }
+            public string Nombre { get; protected set; } = string.Empty;
+            public string Email { get; protected set; } = string.Empty;
+            public string Contrasenia { get; private set; } = string.Empty;
             public bool EsAdmin { get; protected set; }
-            public DateTime FechaCreacion { get; protected set; }
+            public DateTime FechaCreacion { get; protected set; } = DateTime.Now;
             public bool Activo { get; protected set; }
 
             // Constructor vacío requerido por EF

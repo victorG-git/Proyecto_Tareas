@@ -10,8 +10,7 @@ namespace Proyecto_Tareas.Dominio.Clases
     {
 
             public int FrecuenciaDias;
-            public DateTime ProximaFecha;
-            
+            public DateTime ProximaFecha { get; protected set; } = DateTime.Now;           
             
             public TareaConSubtarea(int id, string titulo, string descripcion, DateTime fechaLimite, PrioridadTarea prioridad)
            : base(id, titulo, descripcion, fechaLimite, prioridad)

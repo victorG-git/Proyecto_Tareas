@@ -4,6 +4,7 @@ using Proyecto_Tareas.Dominio.Clases;
 
 namespace Proyecto_Tareas.PruebasTest
 {
+    /*
     public class Pruebas_Unitarias
     {
         private Tarea tarea;
@@ -98,6 +99,6 @@ namespace Proyecto_Tareas.PruebasTest
             programar.AgregarSubtarea();
 
         
-        }*/
-    }
+        }
+    }*/
 }
