@@ -5,7 +5,6 @@ namespace Proyecto_Tareas
     public class Program
     {
         /*
-
             var builder = WebApplication.CreateBuilder(args);
 
             // Registrar servicios

@@ -1,17 +1,19 @@
-using System;
-using System.Collections.Generic;
-
 namespace Proyecto_Tareas.Aplicacion.DTOs
 {
     public class TareaDto
     {
-        
         public int Id { get; set; }
-        public string Titulo { get; set; }
+        public string Titulo { get; set; } = string.Empty;
         public DateTime FechaLimite { get; set; }
+
         public EstadoTarea Estado { get; set; }
         public PrioridadTarea Prioridad { get; set; }
+
+        public string NombreUsuario { get; set; } = "Sin asignar";
+
         public List<int> IdsSubtareas { get; set; } = new List<int>();
+
+        public TareaDto() { }
 
         public TareaDto(
             int id,
@@ -19,7 +21,8 @@ namespace Proyecto_Tareas.Aplicacion.DTOs
             DateTime fechaLimite,
             EstadoTarea estado,
             PrioridadTarea prioridad,
-            List<int> idsSubtareas)
+            List<int> idsSubtareas,
+            string nombreUsuario)
         {
             Id = id;
             Titulo = titulo;
@@ -27,6 +30,7 @@ namespace Proyecto_Tareas.Aplicacion.DTOs
             Estado = estado;
             Prioridad = prioridad;
             IdsSubtareas = idsSubtareas;
+            NombreUsuario = nombreUsuario;
         }
     }
 }
