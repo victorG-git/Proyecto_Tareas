@@ -1,9 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestPlatform.Common.Interfaces;
+using Proyecto_Tareas.Dominio.Clases;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Proyecto_Tareas.Dominio.Clases
+namespace Proyecto_Tareas.Aplicacion.Servicio
 {
     internal class ServicioUsuarios
     {

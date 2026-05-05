@@ -1,34 +1,30 @@
-using Proyecto_Tareas.Dominio.Clases;
+using Microsoft.EntityFrameworkCore;
+using Proyecto_Tareas.Infrastructura.Repositorios;
 
-namespace Proyecto_Tareas
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<GestorTareasContext>(options =>
+options.UseSqlServer(
+builder.Configuration.GetConnectionString("GestorTareas")
+)
+);
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
 {
-    public class Program
-    {
-        /*
-            var builder = WebApplication.CreateBuilder(args);
-
-            // Registrar servicios
-            builder.Services.AddControllers();
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-
-            // Registrar DbContext
-            builder.Services.AddDbContext<GestorTareasContext>();
-
-            var app = builder.Build();
-
-            // Configurar pipeline
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
-
-            app.UseHttpsRedirection();
-            app.UseAuthorization();
-            app.MapControllers();
-
-            app.Run();
-        }*/
-    }
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
