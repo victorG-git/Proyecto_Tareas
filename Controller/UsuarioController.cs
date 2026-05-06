@@ -2,26 +2,20 @@
 
 namespace Proyecto_Tareas.Controller
 {
-
     [ApiController]
-    [Route("api/controller")]
+    [Route("api/[controller]")]
     public class UsuarioController : ControllerBase
     {
-        /*
-        private readonly GestorTareasService _servicio;
-
-        public UsuarioController(GestorTareasService servicio)
-         => _servicio = servicio;
+        private static readonly List<string> _usuarios = new()
+        {
+            "Juan",
+            "Ana"
+        };
 
         [HttpGet]
-        public IActionResult GetAll() { }
-
-        [HttpGet("{id}/tareas")]
-        public IActionResult GetTareas(int id)
+        public IActionResult GetAll()
         {
-            var tareas = _servicio.ObtenerTareasPorUsuario(id);
-            if (tareas == null) return NotFound();
-            return Ok(tareas);
-        }*/
+            return Ok(_usuarios);
+        }
     }
 }
